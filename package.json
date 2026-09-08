@@ -1,0 +1,10 @@
+{
+  "name": "sunglasses-promotion-game",
+  "version": "1.0.0",
+  "private": true,
+  "description": "스포츠 선글라스 프로모션 미니게임",
+  "scripts": {
+    "start": "node server.js",
+    "check": "node --check game.js && node --check server.js"
+  }
+}

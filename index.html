@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="theme-color" content="#061a32" />
+    <meta
+      name="description"
+      content="강한 햇빛을 피하며 20초 동안 버티는 스포츠 선글라스 프로모션 미니게임"
+    />
+    <title>햇빛을 피해라! 선글라스 챌린지</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <section class="game-card" aria-live="polite">
+        <div class="ambient ambient-left" aria-hidden="true"></div>
+        <div class="ambient ambient-right" aria-hidden="true"></div>
+        <button class="sound-toggle" type="button" data-action="sound" aria-label="음소거" aria-pressed="false">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path class="sound-body" d="M5 9v6h4l5 4V5L9 9H5Z" />
+            <path class="sound-wave" d="M17 8.5c1.4 1.8 1.4 5.2 0 7M19.5 6c2.8 3.2 2.8 8.8 0 12" />
+            <path class="sound-slash" d="m5 5 14 14" />
+          </svg>
+        </button>
+
+        <section class="screen start-screen is-active" data-screen="start">
+          <div class="start-copy">
+            <h1>
+              햇빛을 <em>피해라!</em><br />
+              선글라스 챌린지
+            </h1>
+            <p class="lead">강한 햇빛을 피해 목표 시간 동안 버텨보세요!</p>
+            <p class="instructions">
+              방향키나 마우스, 터치로 선글라스를 좌우로 움직여<br class="desktop-only" />
+              내려오는 햇빛을 피하세요.
+            </p>
+            <button class="primary-button" type="button" data-action="start">
+              <span>게임 시작</span>
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="m9 5 7 7-7 7" />
+              </svg>
+            </button>
+          </div>
+          <div class="product-stage" aria-hidden="true">
+            <div class="sun-burst"></div>
+            <img src="assets/sports-sunglasses.png" alt="" />
+            <span class="control-hint control-hint-left">‹</span>
+            <span class="control-hint control-hint-right">›</span>
+          </div>
+        </section>
+
+        <section class="screen play-screen" data-screen="play">
+          <div class="hud">
+            <div class="hud-block timer-block">
+              <div class="hud-row">
+                <span>남은 시간</span>
+                <strong><span data-time>20</span>초</strong>
+              </div>
+              <div class="time-track"><span data-time-bar></span></div>
+            </div>
+            <div class="hud-block status-block">
+              <span>방어 상태</span>
+              <div class="shields" data-shields aria-label="남은 방어력 3">
+                <svg viewBox="0 0 32 38" aria-hidden="true"><path d="M16 2 29 7v10c0 9-5.8 15.8-13 19C8.8 32.8 3 26 3 17V7l13-5Z" /></svg>
+                <svg viewBox="0 0 32 38" aria-hidden="true"><path d="M16 2 29 7v10c0 9-5.8 15.8-13 19C8.8 32.8 3 26 3 17V7l13-5Z" /></svg>
+                <svg viewBox="0 0 32 38" aria-hidden="true"><path d="M16 2 29 7v10c0 9-5.8 15.8-13 19C8.8 32.8 3 26 3 17V7l13-5Z" /></svg>
+              </div>
+            </div>
+          </div>
+
+          <div class="arena" data-arena>
+            <div class="speed-lines" aria-hidden="true"></div>
+            <div class="countdown" data-countdown aria-hidden="true"></div>
+            <div class="player" data-player>
+              <img src="assets/sports-sunglasses.png" alt="플레이어 스포츠 선글라스" draggable="false" />
+            </div>
+            <p class="play-hint" data-play-hint>좌우로 움직여 햇빛을 피하세요</p>
+          </div>
+        </section>
+
+        <section class="screen result-screen success-screen" data-screen="success">
+          <div class="result-glow" aria-hidden="true"></div>
+          <div class="confetti" aria-hidden="true"></div>
+          <img class="result-product" src="assets/sports-sunglasses.png" alt="스포츠 선글라스" />
+          <div class="result-copy">
+            <h2>눈부심 방어 <em>성공!</em> <span aria-hidden="true">🎉</span></h2>
+            <p>스포츠 선글라스 할인 혜택을 확인해보세요.</p>
+            <a class="primary-button benefit-button" href="#" data-action="benefit">
+              <span>혜택 받고 상품 보러가기</span>
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 5 7 7-7 7" /></svg>
+            </a>
+            <button class="secondary-button" type="button" data-action="restart">다시 플레이</button>
+            <small>과제용 프로토타입 · 실제 쿠폰은 발급되지 않습니다.</small>
+          </div>
+        </section>
+
+        <section class="screen result-screen failure-screen" data-screen="failure">
+          <div class="failure-suns" aria-hidden="true">
+            <img src="assets/sun-hazard.png" alt="" />
+            <img src="assets/sun-hazard.png" alt="" />
+          </div>
+          <img class="result-product dimmed" src="assets/sports-sunglasses.png" alt="스포츠 선글라스" />
+          <div class="result-copy">
+            <h2>아쉽네요!</h2>
+            <p>다시 도전해보세요.</p>
+            <button class="primary-button retry-button" type="button" data-action="restart">
+              <span>다시 도전</span>
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 5 7 7-7 7" /></svg>
+            </button>
+          </div>
+        </section>
+
+        <div class="toast" data-toast role="status"></div>
+      </section>
+      <p class="footer-note">SUNGLARE DODGE · SPORTS EYEWEAR PROMOTION</p>
+    </main>
+    <script src="game.js"></script>
+  </body>
+</html>
