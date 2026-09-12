@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="theme-color" content="#06172b" />
+    <meta
+      name="description"
+      content="선글라스 이미지를 보고 퀴즈용 예시 가격을 맞히는 모바일 프로모션 게임"
+    />
+    <title>선글라스 가격 맞히기 | MOADAY</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <section class="game-card" aria-live="polite">
+        <div class="showroom-light" aria-hidden="true"></div>
+
+        <section class="screen start-screen is-active" data-screen="start">
+          <header class="brand-header">
+            <span class="brand-mark">MOADAY</span>
+            <span class="game-number">GAME 04</span>
+          </header>
+
+          <div class="start-copy">
+            <h1>이 선글라스,<br /><em>얼마일까요?</em></h1>
+            <p>3개의 선글라스를 보고<br />가격을 맞혀보세요!</p>
+          </div>
+
+          <div class="hero-stage" aria-hidden="true">
+            <span class="stage-line stage-line-one"></span>
+            <span class="stage-line stage-line-two"></span>
+            <span class="price-corner price-corner-top"></span>
+            <span class="price-corner price-corner-bottom"></span>
+            <img src="assets/quiz-sport.png" alt="" />
+          </div>
+
+          <div class="start-actions">
+            <p class="price-notice" data-price-notice></p>
+            <button class="button button-primary" type="button" data-action="start">
+              게임 시작
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 5 7 7-7 7" /></svg>
+            </button>
+          </div>
+        </section>
+
+        <section class="screen quiz-screen" data-screen="quiz" aria-hidden="true">
+          <header class="quiz-header">
+            <span class="brand-mark">MOADAY</span>
+            <strong data-progress-text>1 / 3</strong>
+          </header>
+
+          <div class="progress-track" aria-hidden="true">
+            <span data-progress-bar></span>
+          </div>
+
+          <div class="question-content">
+            <div class="product-stage">
+              <span class="product-grid" aria-hidden="true"></span>
+              <span class="product-corner product-corner-top" aria-hidden="true"></span>
+              <span class="product-corner product-corner-bottom" aria-hidden="true"></span>
+              <img data-question-image src="" alt="" />
+              <small>QUIZ IMAGE</small>
+            </div>
+
+            <div class="question-copy">
+              <h2 tabindex="-1" data-question-heading>이 선글라스의 가격은 얼마일까요?</h2>
+              <div class="price-options" data-options aria-label="가격 선택지"></div>
+            </div>
+
+            <section class="answer-feedback" data-feedback hidden aria-live="assertive">
+              <div class="feedback-copy">
+                <span class="feedback-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24">
+                    <path class="check-path" d="m6 12 4 4 8-9" />
+                    <path class="cross-path" d="m7 7 10 10M17 7 7 17" />
+                  </svg>
+                </span>
+                <div>
+                  <h3 data-feedback-title>정답이에요!</h3>
+                  <p data-answer-price></p>
+                </div>
+              </div>
+              <p class="explanation" data-explanation></p>
+              <button class="button button-primary next-button" type="button" data-action="next">
+                <span data-next-label>다음 문제</span>
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 5 7 7-7 7" /></svg>
+              </button>
+            </section>
+          </div>
+
+          <p class="price-notice quiz-notice" data-price-notice></p>
+        </section>
+
+        <section class="screen result-screen" data-screen="result" aria-hidden="true">
+          <header class="brand-header result-brand">
+            <span class="brand-mark">MOADAY</span>
+            <span class="game-number">RESULT</span>
+          </header>
+
+          <div class="result-visual" aria-hidden="true">
+            <span class="result-ring"></span>
+            <img src="assets/quiz-round.png" alt="" />
+          </div>
+
+          <div class="result-copy">
+            <p class="score" data-result-score>3문제 중 0문제 정답!</p>
+            <h2 data-result-title>이번엔 감으로 승부하셨네요!</h2>
+            <p data-result-description></p>
+          </div>
+
+          <div class="result-actions">
+            <a class="button button-primary" href="#" data-action="product">
+              선글라스 구경하기
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 5 7 7-7 7" /></svg>
+            </a>
+            <button class="button button-secondary" type="button" data-action="restart">다시 도전하기</button>
+            <p class="price-notice" data-price-notice></p>
+          </div>
+        </section>
+
+        <div class="toast" data-toast role="status" aria-live="polite"></div>
+      </section>
+    </main>
+
+    <script src="questions.js"></script>
+    <script src="game.js"></script>
+  </body>
+</html>
