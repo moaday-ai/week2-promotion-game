@@ -66,7 +66,7 @@ button:disabled {
   position: relative;
   width: min(100%, 520px);
   height: min(900px, calc(100svh - 48px));
-  min-height: 680px;
+  min-height: min(680px, calc(100svh - 48px));
   overflow: hidden;
   overflow: clip;
   border: 1px solid rgba(32, 35, 58, 0.1);
@@ -1135,8 +1135,10 @@ button:disabled {
 }
 
 .result-photo .character {
-  width: min(76%, 320px);
+  width: auto;
+  max-width: 76%;
   height: 93%;
+  aspect-ratio: 4 / 5;
 }
 
 .result-copy {
@@ -1281,10 +1283,21 @@ button:disabled {
   .game {
     width: 100%;
     height: 100svh;
-    min-height: 600px;
+    min-height: min(600px, 100svh);
     border: 0;
     border-radius: 0;
     box-shadow: none;
+  }
+
+  .option-card small {
+    display: -webkit-box;
+    min-height: 2.7em;
+    overflow: hidden;
+    line-height: 1.35;
+    text-overflow: clip;
+    white-space: normal;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
   }
 }
 
@@ -1334,7 +1347,7 @@ button:disabled {
   .swipe-hint { margin: 4px 0 6px; }
   .next-step-button { min-height: 47px; }
 
-  .result-screen { padding-top: 16px; }
+  .result-screen { padding-top: 16px; padding-bottom: 16px; }
   .result-header h2 { margin-bottom: 7px; font-size: 27px; }
   .result-photo { height: 240px; }
   .result-copy h3 { font-size: 24px; }

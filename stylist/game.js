@@ -326,31 +326,72 @@
     return new Promise((resolve) => window.setTimeout(resolve, duration));
   }
 
+  function hasFinalConsonant(text) {
+    const lastCharacter = [...text.trim()].at(-1);
+    if (!lastCharacter) return false;
+
+    const codePoint = lastCharacter.codePointAt(0);
+    if (codePoint < 0xac00 || codePoint > 0xd7a3) return false;
+    return (codePoint - 0xac00) % 28 !== 0;
+  }
+
+  function withSubjectParticle(text) {
+    return `${text}${hasFinalConsonant(text) ? "이" : "가"}`;
+  }
+
+  function clearToast() {
+    clearTimeout(toastTimer);
+    toastTimer = 0;
+    toast.textContent = "";
+    toast.classList.remove("is-visible");
+  }
+
+  function setCaptureLock(isLocked) {
+    state.isCapturing = isLocked;
+    game.classList.toggle("is-capturing", isLocked);
+    if (isLocked) {
+      game.setAttribute("aria-busy", "true");
+    } else {
+      game.removeAttribute("aria-busy");
+    }
+
+    document.querySelectorAll("[data-screen='styling'] button").forEach((button) => {
+      button.disabled = isLocked;
+    });
+  }
+
   async function startCapture() {
     if (state.isCapturing) return;
-    state.isCapturing = true;
     const token = ++captureToken;
+    setCaptureLock(true);
+    countdown.textContent = "3";
+    countdown.classList.remove("is-popping");
+    captureFlash.classList.remove("is-flashing");
     capturePreview.replaceChildren(cloneStudio());
     showScreen("capture");
 
-    for (const value of ["3", "2", "1"]) {
-      if (token !== captureToken) return;
-      countdown.textContent = value;
-      countdown.classList.remove("is-popping");
-      void countdown.offsetWidth;
-      countdown.classList.add("is-popping");
-      await wait(650);
-    }
+    try {
+      for (const value of ["3", "2", "1"]) {
+        if (token !== captureToken) return;
+        countdown.textContent = value;
+        countdown.classList.remove("is-popping");
+        void countdown.offsetWidth;
+        countdown.classList.add("is-popping");
+        await wait(650);
+      }
 
-    if (token !== captureToken) return;
-    countdown.textContent = "찰칵!";
-    captureFlash.classList.add("is-flashing");
-    navigator.vibrate?.(45);
-    await wait(520);
-    captureFlash.classList.remove("is-flashing");
-    state.isCapturing = false;
-    renderResult();
-    showScreen("result");
+      if (token !== captureToken) return;
+      countdown.textContent = "찰칵!";
+      captureFlash.classList.add("is-flashing");
+      navigator.vibrate?.(45);
+      await wait(520);
+      captureFlash.classList.remove("is-flashing");
+      if (token !== captureToken) return;
+      renderResult();
+      showScreen("result");
+    } finally {
+      if (token === captureToken) setCaptureLock(false);
+    }
   }
 
   function renderResult() {
@@ -359,7 +400,7 @@
 
     resultPhoto.replaceChildren(cloneStudio());
     resultName.textContent = result.name;
-    resultDescription.textContent = `${result.description} ${glasses.name}이 포인트를 완성해 줍니다.`;
+    resultDescription.textContent = `${result.description} ${withSubjectParticle(glasses.name)} 포인트를 완성해 줍니다.`;
     productName.textContent = glasses.name;
     productDescription.textContent = glasses.description;
     productSwatch.style.setProperty("--product-color", glasses.color);
@@ -376,17 +417,23 @@
 
   function resetGame() {
     captureToken += 1;
+    setCaptureLock(false);
+    clearToast();
     state.screen = "styling";
     state.step = 0;
     state.selectedGlasses = GAME_DATA.glasses[0].id;
     state.selectedStyle = GAME_DATA.styles[0].id;
     state.selectedBackground = GAME_DATA.backgrounds[0].id;
-    state.isCapturing = false;
     renderStep();
     showScreen("styling");
   }
 
   document.addEventListener("click", (event) => {
+    if (state.isCapturing) {
+      event.preventDefault();
+      return;
+    }
+
     const option = event.target.closest("[data-option-id]");
     if (option) {
       selectItem(option.dataset.optionId);
