@@ -25,8 +25,8 @@
         name: "캣아이 블랙",
         description: "선명한 인상을 만드는 포인트 프레임",
         color: "#171622",
-        asset: "",
-        thumbnail: "",
+        asset: "assets/glasses/cat.png",
+        thumbnail: "assets/glasses/cat.png",
         productUrl: "#",
       },
       {
@@ -34,8 +34,8 @@
         name: "라운드 앰버",
         description: "부드러운 무드의 빈티지 라운드 프레임",
         color: "#aa5f36",
-        asset: "",
-        thumbnail: "",
+        asset: "assets/glasses/round.png",
+        thumbnail: "assets/glasses/round.png",
         productUrl: "#",
       },
       {
@@ -43,8 +43,8 @@
         name: "스퀘어 크림",
         description: "깔끔하고 감각적인 와이드 프레임",
         color: "#f1debd",
-        asset: "",
-        thumbnail: "",
+        asset: "assets/glasses/square.png",
+        thumbnail: "assets/glasses/square.png",
         productUrl: "#",
       },
       {
@@ -52,8 +52,8 @@
         name: "스포츠 블루",
         description: "가볍고 역동적인 커브드 프레임",
         color: "#276e91",
-        asset: "",
-        thumbnail: "",
+        asset: "assets/glasses/sport.png",
+        thumbnail: "assets/glasses/sport.png",
         productUrl: "#",
       },
     ],
@@ -63,24 +63,24 @@
         name: "시티",
         description: "도회적인 재킷 룩",
         colors: ["#ef4d36", "#20223b"],
-        asset: "",
-        thumbnail: "",
+        asset: "assets/character/city.png",
+        thumbnail: "assets/character/city.png",
       },
       {
         id: "casual",
         name: "캐주얼",
         description: "편안한 데님 룩",
         colors: ["#f5c84c", "#507aa0"],
-        asset: "",
-        thumbnail: "",
+        asset: "assets/character/casual.png",
+        thumbnail: "assets/character/casual.png",
       },
       {
         id: "active",
         name: "액티브",
         description: "경쾌한 스포츠 룩",
         colors: ["#7bcaae", "#313852"],
-        asset: "",
-        thumbnail: "",
+        asset: "assets/character/active.png",
+        thumbnail: "assets/character/active.png",
       },
     ],
     backgrounds: [
@@ -89,24 +89,24 @@
         name: "도심의 오후",
         description: "그래픽 빌딩과 햇살",
         colors: ["#f2b4ab", "#719ab0"],
-        asset: "",
-        thumbnail: "",
+        asset: "assets/backgrounds/city.png",
+        thumbnail: "assets/backgrounds/city.png",
       },
       {
         id: "ocean",
         name: "푸른 해변",
         description: "청량한 바다와 모래",
         colors: ["#87d9de", "#f7d9a0"],
-        asset: "",
-        thumbnail: "",
+        asset: "assets/backgrounds/ocean.png",
+        thumbnail: "assets/backgrounds/ocean.png",
       },
       {
         id: "festival",
         name: "선셋 페스티벌",
         description: "리듬이 느껴지는 노을",
         colors: ["#ec7f69", "#6a4e91"],
-        asset: "",
-        thumbnail: "",
+        asset: "assets/backgrounds/festival.png",
+        thumbnail: "assets/backgrounds/festival.png",
       },
     ],
     results: {
@@ -170,6 +170,7 @@
   const studioLabel = document.querySelector("[data-studio-label]");
   const backgroundAsset = document.querySelector("[data-background-asset]");
   const characterAsset = document.querySelector("[data-character-asset]");
+  const characterPlaceholder = document.querySelector(".character-placeholder");
   const glassesAsset = document.querySelector("[data-glasses-asset]");
   const glassesPlaceholder = document.querySelector(".glasses-placeholder");
   const countdown = document.querySelector("[data-countdown]");
@@ -229,6 +230,7 @@
     setImageAsset(backgroundAsset, background.asset);
     setImageAsset(characterAsset, style.asset, `${style.name} 스타일 캐릭터`);
     setImageAsset(glassesAsset, glasses.asset, glasses.name);
+    characterPlaceholder.hidden = Boolean(style.asset);
     glassesPlaceholder.hidden = Boolean(glasses.asset);
   }
 
@@ -261,6 +263,7 @@
           <button
             class="option-card${isSelected ? " is-selected" : ""}"
             type="button"
+            data-option-type="${step.key}"
             data-option-id="${item.id}"
             aria-pressed="${isSelected}"
           >
@@ -403,8 +406,7 @@
     resultDescription.textContent = `${result.description} ${withSubjectParticle(glasses.name)} 포인트를 완성해 줍니다.`;
     productName.textContent = glasses.name;
     productDescription.textContent = glasses.description;
-    productSwatch.style.setProperty("--product-color", glasses.color);
-    productSwatch.dataset.shape = glasses.id;
+    setImageAsset(productSwatch, glasses.thumbnail || glasses.asset, `${glasses.name} 제품 이미지`);
     productLink.href = glasses.productUrl;
   }
 

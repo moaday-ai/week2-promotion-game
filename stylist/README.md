@@ -8,16 +8,17 @@
 
 `http://localhost:4173/stylist/`
 
-## 상품과 이미지 교체
+## 이미지 에셋과 상품 URL
 
-`game.js`의 `GAME_DATA`만 수정하면 됩니다.
+게임 비주얼은 `assets/` 아래에 역할별로 정리되어 있으며, `game.js`의 `GAME_DATA`에서 조합합니다.
 
+- `assets/glasses/`: 캐릭터 오버레이와 선택 카드에 사용하는 선글라스 4종
+- `assets/character/`: 시티·캐주얼·액티브 의상별 투명 캐릭터 3종
+- `assets/backgrounds/`: 도심·해변·페스티벌 배경 3종
 - `glasses[].asset`: 캐릭터 위에 겹칠 투명 PNG 경로
-- `glasses[].thumbnail`: 선택 카드용 이미지 경로
+- `glasses[].thumbnail`: 선택 카드와 결과 상품 카드용 이미지 경로
 - `glasses[].productUrl`: 실제 상품 상세 URL
 - `styles[].asset`: 스타일별 포즈가 포함된 캐릭터 투명 PNG 경로
 - `backgrounds[].asset`: 세로형 배경 이미지 경로
 
-에셋 경로가 빈 문자열이면 현재 CSS placeholder가 표시됩니다.
-
-권장 폴더는 `assets/glasses`, `assets/glasses-thumbs`, `assets/character`, `assets/backgrounds`입니다.
+현재 상품 URL은 `#`으로 유지되어 상품 버튼을 누르면 준비 중 안내가 표시됩니다. 에셋 경로를 비우면 CSS fallback이 표시됩니다.

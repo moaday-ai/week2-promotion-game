@@ -221,111 +221,51 @@ button:disabled {
   border: 10px solid white;
   border-bottom-width: 36px;
   border-radius: 7px;
-  background: linear-gradient(155deg, #86c9c2, #d9eee5 53%, #f1c995 54%);
+  background: #86c9c2;
   box-shadow: 0 24px 44px rgba(55, 47, 43, 0.21);
   transform: rotate(3deg);
 }
 
 .photo-frame::before,
 .photo-frame::after {
-  content: "";
-  position: absolute;
-  bottom: 0;
-  width: 45%;
-  height: 48%;
-  background: #527f8d;
-  clip-path: polygon(0 100%, 100% 0, 100% 100%);
+  display: none;
 }
 
 .photo-frame::before { left: -10%; }
 .photo-frame::after { right: -10%; transform: scaleX(-1); }
 
-.portrait {
-  position: absolute;
-  z-index: 2;
-  inset: 12% 7% 0;
-}
-
-.portrait span {
+.intro-background-asset,
+.intro-character-asset,
+.intro-glasses-asset {
   position: absolute;
   display: block;
 }
 
-.portrait-head {
-  z-index: 5;
-  left: 34%;
-  top: 13%;
-  width: 32%;
-  height: 28%;
-  border-radius: 48% 48% 45% 45%;
-  background: #efbd96;
-  transform: rotate(-4deg);
-}
-
-.portrait-hair {
-  z-index: 6;
-  left: 27%;
-  top: 5%;
-  width: 45%;
-  height: 27%;
-  border-radius: 54% 54% 30% 25%;
-  background: #25243a;
-  clip-path: polygon(6% 2%, 94% 0, 100% 72%, 76% 52%, 67% 100%, 57% 52%, 27% 68%, 0 84%);
-}
-
-.portrait-neck {
-  z-index: 3;
-  left: 44%;
-  top: 37%;
-  width: 15%;
-  height: 12%;
-  background: #e5a77e;
-}
-
-.portrait-body {
-  z-index: 2;
-  left: 11%;
-  top: 44%;
-  width: 79%;
-  height: 66%;
-  border-radius: 48% 48% 7% 7%;
-  background: #ef5a43;
-  clip-path: polygon(23% 0, 78% 0, 100% 100%, 0 100%);
-}
-
-.portrait-glasses {
-  z-index: 8;
-  left: 31%;
-  top: 22%;
-  width: 41%;
-  height: 11%;
-}
-
-.portrait-glasses i,
-.portrait-glasses b {
-  position: absolute;
-  display: block;
-}
-
-.portrait-glasses i {
-  top: 0;
-  width: 44%;
+.intro-background-asset {
+  z-index: 1;
+  inset: 0;
+  width: 100%;
   height: 100%;
-  border: 5px solid #171622;
-  border-radius: 46% 46% 55% 55%;
-  background: #536471;
-  clip-path: polygon(0 18%, 100% 0, 88% 100%, 12% 100%);
+  object-fit: cover;
 }
 
-.portrait-glasses i:first-child { left: 0; }
-.portrait-glasses i:nth-child(2) { right: 0; transform: scaleX(-1); }
+.intro-character-asset {
+  z-index: 2;
+  left: 50%;
+  bottom: -8%;
+  width: auto;
+  height: 91%;
+  object-fit: contain;
+  transform: translateX(-50%);
+}
 
-.portrait-glasses b {
-  left: 42%;
-  top: 38%;
-  width: 18%;
-  height: 5px;
-  background: #171622;
+.intro-glasses-asset {
+  z-index: 3;
+  left: 35%;
+  top: 20.5%;
+  width: 30%;
+  height: 12%;
+  object-fit: contain;
 }
 
 .spark {
@@ -537,8 +477,9 @@ button:disabled {
   z-index: 3;
   left: 50%;
   bottom: -5%;
-  width: min(67%, 300px);
+  width: auto;
   height: 94%;
+  aspect-ratio: 2 / 3;
   transform: translateX(-50%);
   transform-origin: center bottom;
 }
@@ -554,14 +495,24 @@ button:disabled {
 }
 
 .character-placeholder,
-.character-asset,
-.glasses-asset {
+.character-asset {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
   object-fit: contain;
   object-position: center bottom;
+}
+
+.glasses-asset {
+  position: absolute;
+  z-index: 12;
+  left: 37.5%;
+  top: 3.5%;
+  width: 25%;
+  height: 14%;
+  object-fit: contain;
+  object-position: center;
 }
 
 .character-placeholder span,
@@ -874,9 +825,21 @@ button:disabled {
 }
 
 .option-visual > img {
+  position: absolute;
+  inset: 0;
   width: 100%;
   height: 100%;
   object-fit: contain;
+}
+
+.option-card[data-option-type="backgrounds"] .option-visual > img {
+  object-fit: cover;
+}
+
+.option-card[data-option-type="styles"] .option-visual > img {
+  object-position: center 13%;
+  transform: scale(1.55);
+  transform-origin: center 24%;
 }
 
 .option-card strong,
@@ -1032,8 +995,9 @@ button:disabled {
 }
 
 .capture-preview .character {
-  width: min(82%, 380px);
+  width: auto;
   height: 88%;
+  aspect-ratio: 2 / 3;
 }
 
 .capture-copy {
@@ -1136,9 +1100,8 @@ button:disabled {
 
 .result-photo .character {
   width: auto;
-  max-width: 76%;
   height: 93%;
-  aspect-ratio: 4 / 5;
+  aspect-ratio: 2 / 3;
 }
 
 .result-copy {
@@ -1216,37 +1179,10 @@ button:disabled {
 }
 
 .product-swatch {
-  position: relative;
+  display: block;
+  width: 72px;
   height: 32px;
-  --product-color: #171622;
-}
-
-.product-swatch::before,
-.product-swatch::after {
-  content: "";
-  position: absolute;
-  top: 4px;
-  width: 30px;
-  height: 22px;
-  border: 4px solid var(--product-color);
-  border-radius: 7px;
-  background: rgba(65, 72, 86, 0.62);
-}
-
-.product-swatch::before { left: 2px; }
-.product-swatch::after { right: 2px; }
-
-.product-swatch[data-shape="round"]::before,
-.product-swatch[data-shape="round"]::after { border-radius: 50%; }
-
-.product-swatch[data-shape="cat"]::before,
-.product-swatch[data-shape="cat"]::after { clip-path: polygon(0 15%, 100% 0, 88% 100%, 10% 100%); }
-
-.product-swatch[data-shape="sport"]::before,
-.product-swatch[data-shape="sport"]::after { border-radius: 45% 40% 60%; background: #4ba6bf; }
-
-.product-swatch::after {
-  box-shadow: -16px 7px 0 -13px var(--product-color);
+  object-fit: contain;
 }
 
 .cta-button { flex: 0 0 auto; min-height: 52px; }
