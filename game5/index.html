@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="theme-color" content="#d9f3ff" />
+    <meta
+      name="description"
+      content="네 가지 질문으로 알아보는 재미있는 선글라스 스타일 테스트"
+    />
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23ff4d24'/%3E%3Cpath d='M8 27h6l3 16h13l2-7h1l2 7h13l3-16h5' fill='none' stroke='white' stroke-width='5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E" />
+    <title>당신의 선글라스 타입은?</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <section class="quiz-app" aria-live="polite">
+        <section class="screen intro-screen is-active" data-screen="intro" aria-hidden="false">
+          <div class="intro-copy">
+            <h1>당신의<br /><em>선글라스</em> 타입은?</h1>
+            <p>4개의 장면을 고르면<br />햇빛 아래 나의 스타일이 보여요.</p>
+            <div class="duration" aria-label="예상 소요 시간 약 20초">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <circle cx="12" cy="12" r="8.5"></circle>
+                <path d="M12 7.5V12l3 2"></path>
+              </svg>
+              <span>약 20초</span>
+            </div>
+          </div>
+
+          <div class="intro-visual" aria-hidden="true">
+            <div class="sun-mark"><span></span></div>
+            <div class="product-halo"></div>
+            <img src="assets/intro/hero.png" alt="" />
+          </div>
+
+          <button class="button button-primary intro-button" type="button" data-action="start">
+            <span>내 타입 알아보기</span>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 5 7 7-7 7" /></svg>
+          </button>
+        </section>
+
+        <section class="screen question-screen" data-screen="question" aria-hidden="true">
+          <header class="question-header">
+            <div class="progress-copy">
+              <strong data-current-question>1</strong><span> / </span><span data-total-questions>4</span>
+            </div>
+            <div
+              class="progress-track"
+              role="progressbar"
+              aria-label="질문 진행률"
+              aria-valuemin="1"
+              aria-valuemax="4"
+              aria-valuenow="1"
+              data-progress
+            >
+              <span data-progress-fill></span>
+            </div>
+          </header>
+
+          <div class="question-copy">
+            <h2 data-question>햇살 좋은 주말, 가장 먼저 떠오르는 장면은?</h2>
+          </div>
+
+          <div class="choices" data-choices role="group" aria-label="답변을 하나 선택하세요"></div>
+        </section>
+
+        <section class="screen calculating-screen" data-screen="calculating" aria-hidden="true">
+          <div class="calculating-visual" aria-hidden="true">
+            <span class="lens lens-left"></span>
+            <span class="lens lens-right"></span>
+            <span class="bridge"></span>
+            <i class="spark spark-one"></i>
+            <i class="spark spark-two"></i>
+            <i class="spark spark-three"></i>
+          </div>
+          <p>당신의 햇빛 아래 캐릭터를 찾는 중…</p>
+        </section>
+
+        <section class="screen result-screen" data-screen="result" aria-hidden="true">
+          <header class="result-heading">
+            <p>당신의 선글라스 타입은?</p>
+            <h2 data-result-name></h2>
+            <strong data-result-catchphrase></strong>
+          </header>
+
+          <div class="result-visual" data-result-visual>
+            <div class="result-sun" aria-hidden="true"></div>
+            <img data-result-image src="" alt="" />
+          </div>
+
+          <div class="result-details">
+            <p class="result-description" data-result-description></p>
+            <h3>당신에게 어울리는 스타일</h3>
+            <ul class="keyword-list" data-keywords aria-label="추천 스타일 키워드"></ul>
+
+            <a class="button button-primary result-cta" href="#" data-action="product">
+              <span data-cta-label></span>
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 5 7 7-7 7" /></svg>
+            </a>
+            <button class="button button-secondary" type="button" data-action="restart">다시 테스트</button>
+            <small class="disclaimer">
+              재미로 보는 스타일 성향 결과이며, 제품 성능이나 의학적 적합성을 판단하지 않습니다.
+            </small>
+          </div>
+        </section>
+
+        <div class="toast" data-toast role="status" aria-live="polite"></div>
+      </section>
+    </main>
+    <script src="data/game-data.js"></script>
+    <script src="game.js"></script>
+  </body>
+</html>
